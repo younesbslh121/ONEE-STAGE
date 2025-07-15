@@ -1,0 +1,22 @@
+[build]
+  # Commande pour construire l'application
+  command = "cd frontend && npm ci && npm run build"
+  
+  # Dossier contenant les fichiers statiques à publier
+  publish = "frontend/build"
+
+[build.environment]
+  # Version de Node.js
+  NODE_VERSION = "18"
+
+[[redirects]]
+  # Redirection pour le routing côté client React
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  # Cache des assets statiques
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
