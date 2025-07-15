@@ -1,0 +1,264 @@
+/* Styles pour la page FoliumMapPage */
+.folium-map-page {
+  background: #f3f4f6;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.folium-page-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.folium-page-header h1 {
+  margin: 0 0 5px 0;
+  color: #2d3748;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.folium-page-header p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.folium-page-controls {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.folium-controls-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.folium-controls-right {
+  display: flex;
+  align-items: center;
+}
+
+.folium-selected-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1f2937;
+  font-size: 1rem;
+}
+
+.folium-page-content {
+  display: flex;
+  flex: 1;
+}
+
+.folium-sidebar {
+  width: 280px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin-right: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.folium-vehicle-list {
+  margin-bottom: 20px;
+}
+
+.folium-vehicle-item {
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.folium-vehicle-item:hover {
+  background: #e2e8f0;
+}
+
+.folium-vehicle-item.selected {
+  background: #e5f3ff;
+  border: 1px solid #2563eb;
+}
+
+.folium-vehicle-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.folium-vehicle-plate {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.folium-vehicle-details {
+  font-size: 0.85rem;
+  color: #4a5568;
+  margin: 0;
+}
+
+.folium-vehicle-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.85rem;
+  color: #4a5568;
+}
+
+.folium-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.folium-map-info {
+  background: #f1f5f9;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
+  font-size: 0.85rem;
+}
+
+.folium-map-info h4 {
+  margin-bottom: 8px;
+  color: #2d3748;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.folium-map-info ul {
+  padding: 0;
+  list-style: none;
+  margin: 0 0 8px 0;
+}
+
+.folium-map-info ul li {
+  margin: 4px 0;
+}
+
+.folium-map-info p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 0.85rem;
+}
+
+.folium-map-area {
+  flex: 1;
+  display: flex;
+}
+
+/* Boutons */
+.folium-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.folium-btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.folium-btn-primary:hover {
+  background: #2563eb;
+}
+
+.folium-btn-secondary {
+  background: #9ca3af;
+  color: #1f2937;
+}
+
+.folium-btn-secondary:hover {
+  background: #6b7280;
+}
+
+.folium-btn-success {
+  background: #10b981;
+  color: white;
+}
+
+.folium-btn-success:hover {
+  background: #059669;
+}
+
+.folium-btn-danger {
+  background: #ef4444;
+  color: white;
+}
+
+.folium-btn-danger:hover {
+  background: #dc2626;
+}
+
+.folium-select {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid #d1d5db;
+  transition: border-color 0.2s ease;
+}
+
+.folium-select:disabled {
+  background: #f3f4f6;
+  color: #a1a1aa;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+/* Animation de chargement */
+.folium-sidebar-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100px;
+  color: #4a5568;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.folium-spinner-small {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #e2e8f0;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: folium-spinner 1s linear infinite;
+  margin-bottom: 8px;
+}
+
+@keyframes folium-spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .folium-page-content {
+    flex-direction: column;
+  }
+
+  .folium-sidebar {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}

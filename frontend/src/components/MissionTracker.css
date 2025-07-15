@@ -1,0 +1,271 @@
+.mission-tracker {
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #333;
+  color: white;
+}
+
+.tracker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #333;
+}
+
+.tracker-header h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.2em;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.online {
+  color: #10b981;
+  font-weight: bold;
+}
+
+.offline {
+  color: #ef4444;
+  font-weight: bold;
+}
+
+.error-message {
+  background: #dc2626;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 0.9em;
+}
+
+.tracker-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid #404040;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9em;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+}
+
+.current-position {
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid #404040;
+}
+
+.current-position h4 {
+  margin: 0 0 10px 0;
+  color: #fff;
+  font-size: 1em;
+}
+
+.position-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.position-info div {
+  font-size: 0.9em;
+  color: #ccc;
+}
+
+.tracker-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.start-tracking-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.start-tracking-btn:hover {
+  background: #0ea575;
+}
+
+.stop-tracking-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.stop-tracking-btn:hover {
+  background: #dc2626;
+}
+
+.offline-queue {
+  background: #f59e0b;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.9em;
+  margin-top: 15px;
+}
+
+.map-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+}
+
+.map-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.map-toggle-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.map-toggle-btn:hover {
+  background: #2563eb;
+}
+
+.map-container {
+  background: #2a2a2a;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #404040;
+  overflow: hidden;
+}
+
+.map-container .folium-map-embed-container {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.map-container .folium-iframe {
+  border-radius: 6px;
+}
+
+.map-mode-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  justify-content: center;
+  padding: 10px;
+  background: #333;
+  border-radius: 6px;
+}
+
+.mode-btn {
+  background: #555;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mode-btn:hover {
+  background: #666;
+}
+
+.mode-btn.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.mode-btn:disabled {
+  background: #666;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.folium-map-wrapper,
+.simple-map-wrapper {
+  border-radius: 6px;
+  overflow: hidden;
+  background: #333;
+  border: 1px solid #555;
+}
+
+@media (max-width: 768px) {
+  .tracker-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .tracker-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .stat-item {
+    padding: 10px;
+  }
+  
+  .current-position {
+    padding: 10px;
+  }
+  
+  .tracker-controls {
+    flex-direction: column;
+  }
+}
