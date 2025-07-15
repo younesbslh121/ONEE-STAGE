@@ -45,84 +45,44 @@ def init_test_data():
         else:
             print("ℹ️  Utilisateurs déjà présents")
         
-        # Créer des véhicules de test si ils n'existent pas suffisamment
-        vehicle_count = Vehicle.query.count()
-        if vehicle_count < 3:
-            print("🚗 Création des véhicules de test...")
-            vehicles_data = [
-                {
-                    'license_plate': 'ABC-123',
-                    'brand': 'Renault',
-                    'model': 'Clio',
-                    'year': 2020,
-                    'color': 'Bleu',
-                    'fuel_type': 'gasoline',
-                    'status': 'available'
-                },
-                {
-                    'license_plate': 'DEF-456',
-                    'brand': 'Peugeot',
-                    'model': '308',
-                    'year': 2019,
-                    'color': 'Blanc',
-                    'fuel_type': 'diesel',
-                    'status': 'available'
-                },
-                {
-                    'license_plate': 'GHI-789',
-                    'brand': 'Citroën',
-                    'model': 'C4',
-                    'year': 2021,
-                    'color': 'Rouge',
-                    'fuel_type': 'electric',
-                    'status': 'in_use'
-                }
-            ]
-            
-            for vehicle_data in vehicles_data:
-                # Vérifier si le véhicule existe déjà
-                existing = Vehicle.query.filter_by(license_plate=vehicle_data['license_plate']).first()
-                if not existing:
-                    vehicle = Vehicle(**vehicle_data)
-                    db.session.add(vehicle)
-            
-            db.session.commit()
-            print("✅ Véhicules créés")
-        else:
-            print("ℹ️  Véhicules déjà présents")
+        # Ne plus créer automatiquement des véhicules pour une expérience plus propre
+        print("ℹ️  Initialisation des véhicules désactivée - ajoutez manuellement vos véhicules")
         
-        # Créer des locations de test
-        location_count = Location.query.count()
-        if location_count < 10:
-            print("📍 Création des données de localisation...")
-            vehicles = Vehicle.query.all()
-            
-            # Coordonnées de Paris et alentours
-            paris_coords = [
-                (48.8566, 2.3522),  # Centre de Paris
-                (48.8675, 2.3634),  # République
-                (48.8708, 2.3317),  # Opéra
-                (48.8799, 2.3550),  # Gare du Nord
-                (48.8529, 2.3499),  # Notre-Dame
-            ]
-            
-            for vehicle in vehicles:
-                print(f"   📍 Création des locations pour {vehicle.license_plate}")
-                for i, coords in enumerate(paris_coords):
-                    location = Location(
-                        vehicle_id=vehicle.id,
-                        latitude=coords[0] + random.uniform(-0.01, 0.01),
-                        longitude=coords[1] + random.uniform(-0.01, 0.01),
-                        speed=random.uniform(0, 50),
-                        heading=random.uniform(0, 360),
-                        timestamp=datetime.now() - timedelta(minutes=i*30)
-                    )
-                    db.session.add(location)
-            
-            db.session.commit()
-            print("✅ Données de localisation créées")
+        # Créer des locations de test seulement s'il y a des véhicules
+        vehicles = Vehicle.query.all()
+        if vehicles:
+            location_count = Location.query.count()
+            if location_count < 10:
+                print("📍 Création des données de localisation...")
+                
+                # Coordonnées de Paris et alentours
+                paris_coords = [
+                    (48.8566, 2.3522),  # Centre de Paris
+                    (48.8675, 2.3634),  # République
+                    (48.8708, 2.3317),  # Opéra
+                    (48.8799, 2.3550),  # Gare du Nord
+                    (48.8529, 2.3499),  # Notre-Dame
+                ]
+                
+                for vehicle in vehicles:
+                    print(f"   📍 Création des locations pour {vehicle.license_plate}")
+                    for i, coords in enumerate(paris_coords):
+                        location = Location(
+                            vehicle_id=vehicle.id,
+                            latitude=coords[0] + random.uniform(-0.01, 0.01),
+                            longitude=coords[1] + random.uniform(-0.01, 0.01),
+                            speed=random.uniform(0, 50),
+                            heading=random.uniform(0, 360),
+                            timestamp=datetime.now() - timedelta(minutes=i*30)
+                        )
+                        db.session.add(location)
+                
+                db.session.commit()
+                print("✅ Données de localisation créées")
+            else:
+                print("ℹ️  Données de localisation déjà présentes")
         else:
-            print("ℹ️  Données de localisation déjà présentes")
+            print("ℹ️  Aucun véhicule disponible pour créer des données de localisation")
         
         # Créer des missions de test
         mission_count = Mission.query.count()

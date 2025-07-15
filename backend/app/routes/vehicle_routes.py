@@ -219,43 +219,46 @@ def init_database():
             db.session.add(user)
             db.session.commit()
         
-        # Create sample vehicles if none exist
-        if not Vehicle.query.first():
-            vehicles_data = [
-                {
-                    'license_plate': 'ABC-123',
-                    'brand': 'Renault',
-                    'model': 'Clio',
-                    'year': 2020,
-                    'color': 'Bleu',
-                    'fuel_type': 'gasoline'
-                },
-                {
-                    'license_plate': 'DEF-456',
-                    'brand': 'Peugeot',
-                    'model': '308',
-                    'year': 2019,
-                    'color': 'Blanc',
-                    'fuel_type': 'diesel'
-                },
-                {
-                    'license_plate': 'GHI-789',
-                    'brand': 'Citroën',
-                    'model': 'C4',
-                    'year': 2021,
-                    'color': 'Rouge',
-                    'fuel_type': 'electric'
-                }
-            ]
-            
-            for vehicle_data in vehicles_data:
-                vehicle = Vehicle(**vehicle_data)
-                db.session.add(vehicle)
-            
-            db.session.commit()
+        # No longer creating vehicles automatically for a cleaner start experience
+        
+        db.session.commit()
         
         return jsonify({'message': 'Database initialized successfully'}), 200
         
+    except Exception as e:
+        from app import db
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@vehicle_bp.route('/clear-vehicles', methods=['POST'])
+@jwt_required()
+def clear_vehicles():
+    """Remove all vehicles from the system."""
+    try:
+        from app.models.vehicle import Vehicle
+        from app import db
+
+        Vehicle.query.delete()
+        db.session.commit()
+
+        return jsonify({'message': 'All vehicles removed successfully'}), 200
+    except Exception as e:
+        from app import db
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@vehicle_bp.route('/noauth/clear-vehicles', methods=['POST'])
+def clear_vehicles_no_auth():
+    """Remove all vehicles from the system without authentication (for development)."""
+    try:
+        from app.models.vehicle import Vehicle
+        from app import db
+
+        # Delete all vehicles
+        Vehicle.query.delete()
+        db.session.commit()
+
+        return jsonify({'message': 'All vehicles removed successfully'}), 200
     except Exception as e:
         from app import db
         db.session.rollback()

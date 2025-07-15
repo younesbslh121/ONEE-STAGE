@@ -1,83 +1,128 @@
 # Fleet Management System
 
-## Overview
+Système de gestion de flotte avec géolocalisation avancée
 
-This project is a full-stack application that enables company managers to plan, track, and analyze employee trips via a web interface.
+## 🚀 Déploiement sur GitHub Pages
 
-## Features
+Ce projet est automatiquement déployé sur GitHub Pages via GitHub Actions.
 
-- **Authentication:** Secure user authentication using JWT.
-- **Dashboard:** View and manage trips using interactive maps and tables.
-- **Real-time Tracking:** Monitor the real-time position of vehicles.
-- **Dynamic Missions:** Create and assign missions to employees.
-- **Anomaly Detection:** Automatic detection of route deviations, delays, and other anomalies.
+### URL de déploiement
+- **Site web**: https://younesbslh121.github.io/ONEE-STAGE
 
-## Tech Stack
+### Configuration automatique
+- Le déploiement se fait automatiquement à chaque push sur la branche `main`
+- Le workflow GitHub Actions construit et déploie le frontend
+- Aucune configuration manuelle n'est nécessaire
 
-- **Frontend:** React.js (TypeScript), Tailwind CSS, ShadCN UI
-- **Backend:** Flask (Python) with FastAPI for certain APIs
-- **Database:** SQLite (dev), PostgreSQL (production)
-- **Authentication:** JWT
-- **Mapping:** Folium + Geopandas
-- **Deployment:** GitHub + Render / Railway
+## 📋 Utilisation
 
-## Setup
+### Démarrage propre
+Ce système a été configuré pour un démarrage propre :
+- **Aucun véhicule prédéfini** n'est créé automatiquement
+- Vous devez ajouter vos véhicules manuellement via l'interface
+- Les missions ne peuvent être créées qu'après avoir ajouté des véhicules
 
-1. ### Backend
+### Gestion des véhicules
 
-    - Navigate to the backend directory:
-      ```bash
-      cd backend
-      ```
+#### Ajouter un véhicule
+1. Accédez à la page "Véhicules"
+2. Cliquez sur "Ajouter un véhicule"
+3. Remplissez les informations (plaque, marque, modèle, etc.)
+4. Sauvegardez
 
-    - Create a virtual environment and activate it:
-      ```bash
-      python -m venv venv
-      . venv/bin/activate  # On Windows use 'venv\\Scripts\\activate'
-      ```
+#### Supprimer tous les véhicules
+Si vous voulez repartir de zéro :
+```bash
+# Depuis le répertoire backend
+python clear_vehicles.py
+```
 
-    - Install dependencies:
-      ```bash
-      pip install -r requirements.txt
-      ```
+#### Via l'API (pour les développeurs)
+```bash
+# Supprimer tous les véhicules
+curl -X POST http://localhost:5000/api/vehicles/noauth/clear-vehicles
 
-    - Run the server:
-      ```bash
-      flask run
-      ```
+# Ajouter un véhicule
+curl -X POST http://localhost:5000/api/vehicles/noauth \
+  -H "Content-Type: application/json" \
+  -d '{
+    "license_plate": "AB-123-CD",
+    "brand": "Renault",
+    "model": "Clio",
+    "year": 2022,
+    "color": "Bleu",
+    "fuel_type": "gasoline"
+  }'
+```
 
-2. ### Frontend
+## 🛠️ Développement
 
-    - Navigate to the frontend directory:
-      ```bash
-      cd frontend
-      ```
+### Installation
+```bash
+# Installer toutes les dépendances
+npm run install-all
 
-    - Install dependencies:
-      ```bash
-      npm install
-      ```
+# Démarrer le serveur de développement
+npm run dev
+```
 
-    - Start the development server:
-      ```bash
-      npm start
-      ```
+### Structure du projet
+```
+fleet-management/
+├── frontend/          # Application React
+├── backend/           # API Flask
+├── .github/workflows/ # GitHub Actions
+└── README.md
+```
 
-## Deployment
+### Scripts utiles
+```bash
+# Démarrer le backend uniquement
+npm run backend
 
-- **GitHub**
-- **Render**
-- **Railway**
+# Démarrer le frontend uniquement
+npm run frontend
 
-## Testing
+# Construire pour la production
+npm run build
 
-- Use Postman for API testing.
-- Utilize DB Browser for SQLite to view database changes.
+# Nettoyer les véhicules
+cd backend && python clear_vehicles.py
+```
 
-## Contributing
+## 📱 Fonctionnalités
 
-Feel free to contribute by submitting a pull request. Please ensure all tests pass before merging.
+- 🚗 **Gestion de flotte** : Ajout, modification, suppression de véhicules
+- 📍 **Géolocalisation** : Suivi en temps réel des véhicules
+- 📋 **Missions** : Planification et suivi des missions
+- 👥 **Utilisateurs** : Gestion des conducteurs et administrateurs
+- 📊 **Tableau de bord** : Vue d'ensemble des KPIs
+- 🗺️ **Cartes interactives** : Visualisation sur carte Leaflet
 
-## License
+## 🔧 Configuration
 
-MIT License. See `LICENSE` for more information.
+### Variables d'environnement
+Créez un fichier `.env` dans le répertoire backend :
+```env
+FLASK_ENV=development
+DATABASE_URL=sqlite:///fleet.db
+JWT_SECRET_KEY=your-secret-key
+```
+
+### GitHub Pages
+La configuration GitHub Pages est automatique :
+- Le site est publié sur la branche `gh-pages`
+- L'URL est configurée dans `frontend/package.json`
+- Le workflow GitHub Actions gère le déploiement
+
+## 🤝 Contribution
+
+1. Forkez le projet
+2. Créez une branche pour votre fonctionnalité
+3. Commitez vos changements
+4. Pushez vers la branche
+5. Ouvrez une Pull Request
+
+## 📄 License
+
+Ce projet est sous licence MIT.
