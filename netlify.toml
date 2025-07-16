@@ -1,6 +1,6 @@
 [build]
   # Commande pour construire l'application
-  command = "cd frontend && npm ci && npm run build"
+  command = "cd frontend && npm install --force && npm run build"
   
   # Dossier contenant les fichiers statiques à publier
   publish = "frontend/build"
